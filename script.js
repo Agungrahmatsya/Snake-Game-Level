@@ -11,10 +11,26 @@ const DIRECTION = {
 }
 var MOVE_INTERVAL = 150;
 
+function initLifebar(){
+    return{
+        ...initLifeBarCheck(),
+    
+    }
+}
+
 function initPosition() {
     return {
         x: Math.floor(Math.random() * WIDTH),
         y: Math.floor(Math.random() * HEIGHT),
+    }
+}
+
+function initHeadAndBody() {
+    let head = initPosition();
+    let body = [{x: head.x, y: head.y}];
+    return {
+        head: head,
+        body: body,
     }
 }
 
@@ -33,18 +49,42 @@ function initSnake(color) {
 }
 let snake = initSnake("black");
 
-
+// menambahkan apple1
 let apple1 = {
     color: "red",
     position: initPosition(),
 }
 
+//menambahkan apple2
 let apple2 = {
     color: "red",
     position: initPosition(),
 }
 
 // menambahkan gambar kepala ular
+function drawCell(ctx, x, y) {
+    let img = document.getElementById('snake-head');
+    ctx.drawImage(img, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+}
+
+//menambahkan 3 darah untuk integrasi check point
+let lifebar = initLifebar();
+
+let lifeIcon = {
+    position: initPosition()
+}
+let positionObstacle = [
+    { x: 3, y: Math.floor(HEIGHT * 1 / 4) }, // lvl 2
+    { x: 3, y: Math.floor(HEIGHT * 3 / 4) }, // lvl 3
+    { x: 3, y: Math.floor(HEIGHT * 2 / 4) }, // lvl 4
+    
+    // lvl 5
+    { x: 0, y: Math.floor(HEIGHT * 1 / 4) }, 
+    { x: 0, y: Math.floor(HEIGHT * 3 / 4) }, 
+    { x: 5, y: Math.floor(HEIGHT * 2 / 4) }, 
+    
+];
+
 function drawCell(ctx, x, y) {
     let img = document.getElementById('snake-head');
     ctx.drawImage(img, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
