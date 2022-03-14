@@ -44,8 +44,15 @@ let apple2 = {
     position: initPosition(),
 }
 
+// menambahkan gambar kepala ular
 function drawCell(ctx, x, y) {
     let img = document.getElementById('snake-head');
+    ctx.drawImage(img, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+}
+
+// menambahkan gambar badan ular
+function drawCellBody(ctx, x, y) {
+    let img = document.getElementById('snake-body');
     ctx.drawImage(img, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
 }
 
